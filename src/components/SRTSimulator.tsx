@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useTimeVisibility } from "@/components/TimeVisibilityContext";
 
 const scenarios = [
   "You are walking down the street and see someone drop their wallet...",
@@ -66,7 +67,7 @@ export const SRTSimulator = () => {
   const [currentScenarioIndex, setCurrentScenarioIndex] = useState(0);
   const [timer, setTimer] = useState(30);
   const [testOver, setTestOver] = useState(false);
-  const [showTime, setShowTime] = useState(true);
+  const { showTime, toggleTimeVisibility } = useTimeVisibility();
 
   useEffect(() => {
     if (testOver) return;
@@ -90,10 +91,6 @@ export const SRTSimulator = () => {
 
     return () => clearInterval(intervalId);
   }, [currentScenarioIndex, testOver]);
-
-  const toggleTimeVisibility = () => {
-    setShowTime(!showTime);
-  };
 
   if (testOver) {
     return <div className="text-2xl">Test Over.</div>;

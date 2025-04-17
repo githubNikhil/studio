@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useTimeVisibility } from "@/components/TimeVisibilityContext";
 
 const images = [
   "https://picsum.photos/600/400?random=1",
@@ -22,7 +23,7 @@ export const TATSimulator = () => {
   const [isGap, setIsGap] = useState(false);
   const [gapTimer, setGapTimer] = useState(240); // 4 minutes in seconds
   const [testOver, setTestOver] = useState(false);
-  const [showTime, setShowTime] = useState(true);
+  const { showTime, toggleTimeVisibility } = useTimeVisibility();
   const [showGapTime, setShowGapTime] = useState(true);
 
   useEffect(() => {
@@ -70,10 +71,6 @@ export const TATSimulator = () => {
       setTestOver(true);
     }
   }, [currentImageIndex]);
-
-  const toggleTimeVisibility = () => {
-    setShowTime(!showTime);
-  };
 
   const toggleGapTimeVisibility = () => {
     setShowGapTime(!showGapTime);

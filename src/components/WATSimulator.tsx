@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useTimeVisibility } from "@/components/TimeVisibilityContext";
 
 const words = [
   "happy", "sad", "tree", "sky", "book", "run", "jump", "blue", "red", "fast",
@@ -15,7 +16,7 @@ export const WATSimulator = () => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [timer, setTimer] = useState(15);
   const [testOver, setTestOver] = useState(false);
-  const [showTime, setShowTime] = useState(true);
+  const { showTime, toggleTimeVisibility } = useTimeVisibility();
 
   useEffect(() => {
     if (testOver) return;
@@ -39,10 +40,6 @@ export const WATSimulator = () => {
 
     return () => clearInterval(intervalId);
   }, [currentWordIndex, testOver]);
-
-  const toggleTimeVisibility = () => {
-    setShowTime(!showTime);
-  };
 
   if (testOver) {
     return <div className="text-2xl">Test Over.</div>;

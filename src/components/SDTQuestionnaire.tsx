@@ -2,12 +2,13 @@
 
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { useTimeVisibility } from "@/components/TimeVisibilityContext";
 
 export const SDTQuestionnaire = () => {
   const [isStudent, setIsStudent] = useState<boolean | null>(null);
   const [timer, setTimer] = useState(900); // 15 minutes in seconds
   const [testOver, setTestOver] = useState(false);
-  const [showTime, setShowTime] = useState(true);
+  const { showTime, toggleTimeVisibility } = useTimeVisibility();
 
   const studentQuestions = [
     "What your parents think of you?",
@@ -45,10 +46,6 @@ export const SDTQuestionnaire = () => {
 
   const handleOptionClick = (option: boolean) => {
     setIsStudent(option);
-  };
-
-  const toggleTimeVisibility = () => {
-    setShowTime(!showTime);
   };
 
   if (isStudent === null) {
