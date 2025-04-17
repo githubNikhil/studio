@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -23,6 +22,8 @@ export const TATSimulator = () => {
   const [isGap, setIsGap] = useState(false);
   const [gapTimer, setGapTimer] = useState(240); // 4 minutes in seconds
   const [testOver, setTestOver] = useState(false);
+  const [showTime, setShowTime] = useState(true);
+  const [showGapTime, setShowGapTime] = useState(true);
 
   useEffect(() => {
     if (testOver) return;
@@ -70,6 +71,14 @@ export const TATSimulator = () => {
     }
   }, [currentImageIndex]);
 
+  const toggleTimeVisibility = () => {
+    setShowTime(!showTime);
+  };
+
+  const toggleGapTimeVisibility = () => {
+    setShowGapTime(!showGapTime);
+  };
+
   if (testOver) {
     return <div className="text-2xl">Test Over.</div>;
   }
@@ -90,15 +99,25 @@ export const TATSimulator = () => {
               {/* Blank slide */}
             </div>
           )}
-          <p>Time remaining: {timer} seconds</p>
+          <p onClick={toggleTimeVisibility} style={{ cursor: "pointer" }}>
+            Time remaining:{" "}
+            {showTime ? timer + " seconds" : "Click to show time"}
+          </p>
         </>
       ) : (
-        <p>
-          Gap time remaining: {Math.floor(gapTimer / 60)}:
-          {(gapTimer % 60).toLocaleString('en-US', {
-            minimumIntegerDigits: 2,
-            useGrouping: false,
-          })}
+        <p onClick={toggleGapTimeVisibility} style={{ cursor: "pointer" }}>
+          Gap time remaining:{" "}
+          {showGapTime ? (
+            <>
+              {Math.floor(gapTimer / 60)}:
+              {(gapTimer % 60).toLocaleString("en-US", {
+                minimumIntegerDigits: 2,
+                useGrouping: false,
+              })}
+            </>
+          ) : (
+            "Click to show gap time"
+          )}
         </p>
       )}
     </div>

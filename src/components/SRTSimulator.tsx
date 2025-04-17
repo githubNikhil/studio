@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -67,6 +66,7 @@ export const SRTSimulator = () => {
   const [currentScenarioIndex, setCurrentScenarioIndex] = useState(0);
   const [timer, setTimer] = useState(30);
   const [testOver, setTestOver] = useState(false);
+  const [showTime, setShowTime] = useState(true);
 
   useEffect(() => {
     if (testOver) return;
@@ -91,6 +91,10 @@ export const SRTSimulator = () => {
     return () => clearInterval(intervalId);
   }, [currentScenarioIndex, testOver]);
 
+  const toggleTimeVisibility = () => {
+    setShowTime(!showTime);
+  };
+
   if (testOver) {
     return <div className="text-2xl">Test Over.</div>;
   }
@@ -99,7 +103,9 @@ export const SRTSimulator = () => {
     <div className="flex flex-col items-center">
       <h2 className="text-2xl font-semibold mb-4">SRT Simulator</h2>
       <p className="text-lg mb-4">{scenarios[currentScenarioIndex]}</p>
-      <p>Time remaining: {timer} seconds</p>
+      <p onClick={toggleTimeVisibility} style={{ cursor: "pointer" }}>
+        Time remaining: {showTime ? timer + " seconds" : "Click to show time"}
+      </p>
     </div>
   );
 };

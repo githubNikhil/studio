@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -16,6 +15,7 @@ export const WATSimulator = () => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [timer, setTimer] = useState(15);
   const [testOver, setTestOver] = useState(false);
+  const [showTime, setShowTime] = useState(true);
 
   useEffect(() => {
     if (testOver) return;
@@ -40,6 +40,10 @@ export const WATSimulator = () => {
     return () => clearInterval(intervalId);
   }, [currentWordIndex, testOver]);
 
+  const toggleTimeVisibility = () => {
+    setShowTime(!showTime);
+  };
+
   if (testOver) {
     return <div className="text-2xl">Test Over.</div>;
   }
@@ -48,7 +52,9 @@ export const WATSimulator = () => {
     <div className="flex flex-col items-center">
       <h2 className="text-2xl font-semibold mb-4">WAT Simulator</h2>
       <p className="text-4xl font-bold mb-4">{words[currentWordIndex]}</p>
-      <p>Time remaining: {timer} seconds</p>
+      <p onClick={toggleTimeVisibility} style={{ cursor: "pointer" }}>
+        Time remaining: {showTime ? timer + " seconds" : "Click to show time"}
+      </p>
     </div>
   );
 };

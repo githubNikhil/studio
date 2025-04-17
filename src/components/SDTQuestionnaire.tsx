@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -8,6 +7,7 @@ export const SDTQuestionnaire = () => {
   const [isStudent, setIsStudent] = useState<boolean | null>(null);
   const [timer, setTimer] = useState(900); // 15 minutes in seconds
   const [testOver, setTestOver] = useState(false);
+  const [showTime, setShowTime] = useState(true);
 
   const studentQuestions = [
     "What your parents think of you?",
@@ -47,6 +47,10 @@ export const SDTQuestionnaire = () => {
     setIsStudent(option);
   };
 
+  const toggleTimeVisibility = () => {
+    setShowTime(!showTime);
+  };
+
   if (isStudent === null) {
     return (
       <div className="flex flex-col items-center">
@@ -75,12 +79,19 @@ export const SDTQuestionnaire = () => {
           {index + 1}. {question}
         </p>
       ))}
-      <p>
-        Time remaining: {Math.floor(timer / 60)}:
-        {(timer % 60).toLocaleString('en-US', {
-          minimumIntegerDigits: 2,
-          useGrouping: false,
-        })}
+      <p onClick={toggleTimeVisibility} style={{ cursor: "pointer" }}>
+        Time remaining:{" "}
+        {showTime ? (
+          <>
+            {Math.floor(timer / 60)}:
+            {(timer % 60).toLocaleString("en-US", {
+              minimumIntegerDigits: 2,
+              useGrouping: false,
+            })}
+          </>
+        ) : (
+          "Click to show time"
+        )}
       </p>
     </div>
   );
