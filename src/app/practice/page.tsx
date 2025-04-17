@@ -19,7 +19,7 @@ export default function PracticePage() {
         <Button onClick={() => handleTestClick("wat")}>WAT Simulator</Button>
         <Button onClick={() => handleTestClick("srt")}>SRT Simulator</Button>
         <Button onClick={() => handleTestClick("sdt")}>SDT Questionnaire</Button>
-        <Button onClick={() => handleTestClick("full")}>Full Length Psych</Button>
+        <Button onClick={() => handleTestClick("full")}>Full Length Psych Test</Button>
       </div>
     </div>
   );
