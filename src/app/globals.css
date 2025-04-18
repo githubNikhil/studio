@@ -5,6 +5,8 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  background-color: #f0f0f0; /* Light grey background */
+  padding: 20px; /* Add some padding around the content */
 }
 
 @layer base {
@@ -87,3 +89,4 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
