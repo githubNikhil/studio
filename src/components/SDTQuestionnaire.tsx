@@ -50,7 +50,7 @@ export const SDTQuestionnaire = () => {
 
   if (isStudent === null) {
     return (
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center justify-center min-h-screen">
         <h2 className="text-2xl font-semibold mb-4">SDT Questionnaire</h2>
         <p className="mb-4">What describes you best?</p>
         <div className="flex gap-4">
@@ -68,28 +68,45 @@ export const SDTQuestionnaire = () => {
   const questions = isStudent ? studentQuestions : professionalQuestions;
 
   return (
-    <div className="flex flex-col items-center">
-      <h2 className="text-2xl font-semibold mb-4">SDT Questionnaire</h2>
-      <p className="mb-4">Please answer the following questions:</p>
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <p className="mb-4 underline">Please answer the following questions:</p>
       {questions.map((question, index) => (
-        <p key={index} className="mb-2">
+        <div className="w-full flex justify-center"> 
+            <p key={index} className="mb-2 font-bold text-left w-1/2">
           {index + 1}. {question}
         </p>
+          </div>
       ))}
-      <p onClick={toggleTimeVisibility} style={{ cursor: "pointer" }}>
+      <p
+        onClick={toggleTimeVisibility}
+        style={{
+          cursor: "pointer",
+          animation: showTime ? "fade 3s infinite" : "none",
+        }}
+      >
         Time remaining:{" "}
         {showTime ? (
           <>
-            {Math.floor(timer / 60)}:
-            {(timer % 60).toLocaleString("en-US", {
-              minimumIntegerDigits: 2,
-              useGrouping: false,
-            })}
+        {Math.floor(timer / 60)}:
+        {(timer % 60).toLocaleString("en-US", {
+          minimumIntegerDigits: 2,
+          useGrouping: false,
+        })}
           </>
         ) : (
           "Click to show time"
         )}
       </p>
+      <style jsx>{`
+        @keyframes fade {
+          0%, 100% {
+        opacity: 1;
+          }
+          50% {
+        opacity: 0;
+          }
+        }
+      `}</style>
     </div>
   );
 };

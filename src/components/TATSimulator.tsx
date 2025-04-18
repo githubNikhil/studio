@@ -24,7 +24,6 @@ export const TATSimulator = () => {
   const [gapTimer, setGapTimer] = useState(240); // 4 minutes in seconds
   const [testOver, setTestOver] = useState(false);
   const { showTime, toggleTimeVisibility } = useTimeVisibility();
-  const [showGapTime, setShowGapTime] = useState(true);
 
   useEffect(() => {
     if (testOver) return;
@@ -72,17 +71,13 @@ export const TATSimulator = () => {
     }
   }, [currentImageIndex]);
 
-  const toggleGapTimeVisibility = () => {
-    setShowGapTime(!showGapTime);
-  };
 
   if (testOver) {
     return <div className="text-2xl">Test Over.</div>;
   }
 
   return (
-    <div className="flex flex-col items-center">
-      <h2 className="text-2xl font-semibold mb-4">TAT Simulator</h2>
+    <div className="flex flex-col items-center justify-center min-h-screen">
       {!isGap ? (
         <>
           {currentImageIndex < images.length ? (
@@ -102,9 +97,9 @@ export const TATSimulator = () => {
           </p>
         </>
       ) : (
-        <p onClick={toggleGapTimeVisibility} style={{ cursor: "pointer" }}>
+        <p onClick={toggleTimeVisibility} style={{ cursor: "pointer" }}>
           Gap time remaining:{" "}
-          {showGapTime ? (
+          {showTime ? (
             <>
               {Math.floor(gapTimer / 60)}:
               {(gapTimer % 60).toLocaleString("en-US", {

@@ -42,16 +42,33 @@ export const WATSimulator = () => {
   }, [currentWordIndex, testOver]);
 
   if (testOver) {
-    return <div className="text-2xl">Test Over.</div>;
+    return <div className="text-2xl items-center justify-center min-h-screen">Test Over.</div>;
   }
 
   return (
-    <div className="flex flex-col items-center">
-      <h2 className="text-2xl font-semibold mb-4">WAT Simulator</h2>
-      <p className="text-4xl font-bold mb-4">{words[currentWordIndex]}</p>
-      <p onClick={toggleTimeVisibility} style={{ cursor: "pointer" }}>
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <p className="text-8xl font-bold mb-4"><strong>{words[currentWordIndex].toUpperCase()}</strong></p>
+      <p
+        onClick={toggleTimeVisibility}
+        style={{
+          cursor: "pointer",
+          fontSize: "0.875rem",
+          opacity: 1,
+          animation: showTime ? "fade 3s ease-in-out infinite" : "none",
+        }}
+      >
         Time remaining: {showTime ? timer + " seconds" : "Click to show time"}
       </p>
+      <style jsx>{`
+        @keyframes fade {
+          0%, 100% {
+        opacity: 1;
+          }
+          50% {
+        opacity: 0;
+          }
+        }
+      `}</style>
     </div>
   );
 };
