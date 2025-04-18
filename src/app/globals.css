@@ -3,10 +3,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Updated body styles with darker grey background, rounded corners and 3cm margins. */
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #f0f0f0; /* Light grey background */
-  padding: 20px; /* Add some padding around the content */
+  background-color: #d3d3d3; /* Darker grey background */
+  padding: 3cm; /* Add 3cm padding around the content */
+  border-radius: 20px; /* Rounded corners */
 }
 
 @layer base {
@@ -89,4 +91,3 @@ body {
     @apply bg-background text-foreground;
   }
 }
-
