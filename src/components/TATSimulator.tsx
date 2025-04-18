@@ -91,14 +91,29 @@ export const TATSimulator = () => {
               {/* Blank slide */}
             </div>
           )}
-          <p onClick={toggleTimeVisibility} style={{ cursor: "pointer" }}>
+          <p
+          onClick={toggleTimeVisibility}
+          style={{
+          cursor: "pointer",
+          fontSize: "0.875rem",
+          opacity: 1,
+          animation: showTime ? "fade 3s ease-in-out infinite" : "none",
+          }}
+          >
             Time remaining:{" "}
             {showTime ? timer + " seconds" : "Click to show time"}
           </p>
         </>
       ) : (
-        <p onClick={toggleTimeVisibility} style={{ cursor: "pointer" }}>
-          Gap time remaining:{" "}
+        <p
+          onClick={toggleTimeVisibility}
+          style={{
+          cursor: "pointer",
+          fontSize: "0.875rem",
+          opacity: 1,
+          animation: showTime ? "fade 3s ease-in-out infinite" : "none",
+          }}>
+          Writing time remaining:{" "}
           {showTime ? (
             <>
               {Math.floor(gapTimer / 60)}:
@@ -112,6 +127,16 @@ export const TATSimulator = () => {
           )}
         </p>
       )}
+      <style jsx>{`
+        @keyframes fade {
+          0%, 100% {
+        opacity: 1;
+          }
+          50% {
+        opacity: 0;
+          }
+        }
+      `}</style>
     </div>
   );
 };
